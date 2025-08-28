@@ -1,0 +1,11 @@
+# services:
+#   payments-service:
+#     image: payments-service:latest
+#     ports:
+#       - 9999:9999
+#     environment:
+#       - NODE_ENV=development
+#     volumes:
+#       - ./src:/app/src
+#     working_dir: /app
+#     command: npm run dev
