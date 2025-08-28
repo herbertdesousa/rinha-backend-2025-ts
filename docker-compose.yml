@@ -1,6 +1,19 @@
 services:
-  app:
-    container_name: rinha-backend-2025-app-ts
-    image: rinha-backend-2025-ts:latest
+  nginx:
+    container_name: rinha-backend-2025-nginx
+    image: nginx:latest
     ports:
-      - 9999:9999
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app1
+      - app2
+
+  app1:
+    container_name: rinha-backend-2025-app-ts-1
+    image: rinha-backend-2025-ts:latest
+
+  app2:
+    container_name: rinha-backend-2025-app-ts-2
+    image: rinha-backend-2025-ts:latest
