@@ -9,11 +9,36 @@ services:
     depends_on:
       - app1
       - app2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "116MB"
+    networks:
+      - backend
+      - payment-processor
 
-  app1:
+  app1: &api
     container_name: rinha-backend-2025-app-ts-1
     image: rinha-backend-2025-ts:latest
+    environment:
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "116MB"
+    networks:
+      - backend
+      - payment-processor
 
   app2:
+    <<: *api
     container_name: rinha-backend-2025-app-ts-2
-    image: rinha-backend-2025-ts:latest
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
