@@ -1,11 +1,6 @@
-# services:
-#   payments-service:
-#     image: payments-service:latest
-#     ports:
-#       - 9999:9999
-#     environment:
-#       - NODE_ENV=development
-#     volumes:
-#       - ./src:/app/src
-#     working_dir: /app
-#     command: npm run dev
+services:
+  app:
+    container_name: rinha-backend-2025-app-ts
+    image: rinha-backend-2025-ts:latest
+    ports:
+      - 9999:9999
